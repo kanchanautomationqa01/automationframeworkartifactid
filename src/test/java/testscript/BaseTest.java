@@ -1,30 +1,38 @@
 package testscript;
 
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import pageobject.LoginPageObject;
 
 public class BaseTest extends ReusableTestComponent {
-@Test
-	public void tc01()
+	@Test(dataProvider="getExcelData")
+	public void tc01(String username , String password) 
 	{
 		
-	launchAndLogin();
+	launchAndLogin(username,password);
 		
 	}
 
-    @Test
-    public void tc02()
-    {
-	String actualerror = "Error: Please check your username and password. If you still can't log in, contact your Salesforce administrator";
-	String expectederror = "Error: Please check your credentials. If you still can't log in, contact your Salesforce administrator.";
-	Assert.assertEquals(actualerror, expectederror);
-    }
-
+    
+        @DataProvider
+		public Object[][] getExcelData() throws IOException 
+		{
+		String filepath = "C:\\Users\\hp\\OneDrive\\Desktop\\automation\\mycsv.xlsx";
+		String sheetname = "mysheet";	
+			 return ExcelUtility.readExcelData(filepath, sheetname);
+			
+} 
+    
+    
+    
+    
 }

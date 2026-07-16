@@ -12,7 +12,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelUtility {
 	
-public static Object readExcelData(String filepath,String sheetname) throws IOException
+public static Object[][] readExcelData(String filepath,String sheetname) throws IOException
 {
 	FileInputStream fis = new FileInputStream(new File(filepath));
     Workbook workbook = new XSSFWorkbook(fis);

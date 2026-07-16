@@ -19,13 +19,13 @@ public class ReusableTestComponent {
 		return driver;
 	}
 	
-	public void launchAndLogin()
+	public void launchAndLogin(String username , String password)
 	{
 		
 	driver = initializeDriver();
 	LoginPageObject lpo = new LoginPageObject(driver);
 	lpo.openLoginPage();
-	lpo.enterUnandPw("hello", "admin@12");
+	lpo.enterUnandPw(username , password);
 	
 		
 	}
