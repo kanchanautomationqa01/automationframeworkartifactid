@@ -12,14 +12,16 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import pageobject.LoginPageObject;
+import utility.ScreenshotUtility;
 
 public class BaseTest extends ReusableTestComponent {
 	@Test(dataProvider="getExcelData")
-	public void tc01(String username , String password) 
+	public void tc01(String username , String password) throws IOException 
 	{
 		
 	launchAndLogin(username,password);
-		
+	ScreenshotUtility su = new ScreenshotUtility(driver);	
+	su.takeScreenshot(driver);
 	}
 
     
