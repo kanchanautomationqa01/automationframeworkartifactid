@@ -1,27 +1,46 @@
 package listenerPack;
 
+import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+
+import extentpack.ExtentManager;
+
 public class Listener implements ITestListener {
+private 	static ExtentReports extent;
+private static ExtentTest test;	
 	
+	
+	public void onStart(ITestContext context)
+	{
+	extent=ExtentManager.getExtentReport();
+		
+		
+	}
 	public void onTestStart(ITestResult result)
 	{
-		System.out.println("Hello i am started");
-	
+		
+	test = extent.createTest(result.getMethod().getMethodName());
 	}
+	
 	public void onTestSuccess(ITestResult result)
 	{
-		System.out.println(" Hello i run successfully");
-	
+    test.log(Status.PASS, "Test case successfully passed");
 	}
+	
 	public void onTestFailure(ITestResult result)
 	{
-		System.out.println("Hello i failed");
-		System.out.println(result.getMethod().getMethodName());
-	    System.out.println(result.getThrowable());
-	}
+		test.log(Status.FAIL,"Test case failed");
+	} 
 	
+	public void onFinish(ITestContext context)
+	{
+		extent.flush();
+	}
 	
 	
 	
